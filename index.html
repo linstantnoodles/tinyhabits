@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <title>Tiny Habits</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <style>
+            .habit-list p {
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body ng-app="TinyHabits">
+        <div ng-view class="container"></div>
+        <script type="text/ng-template" id="user.html">
+            <div ng-controller="UserInfoController">
+                <div ng-show="userExists()" ng-hide="hideGreeting()" ng-cloak>
+                    <h1>Welcome, {{user.name}} !</h1>
+                </div>
+                <form ng-submit="saveUser()" role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" name="name" ng-model="user.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age" class="col-sm-2 control-label">Age</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" name="age" ng-model="user.age">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio" class="col-sm-2 control-label">Bio</label>
+                        <div class="col-sm-3">
+                            <textarea class="form-control" type="text" name="bio" ng-model="user.bio"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-3">
+                            <input type="submit" name="submit" value="Save" class="btn btn-primary">
+                            <input type="button" name="reset" value="Reset" ng-click="resetUser()" class="btn btn-danger">
+                            <a href="#/habits" class="btn btn-success">Add Habits</a>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="habits.html">
+            <div class="col-md-6">
+                <form>
+                    <label>Description</label>
+                    <textarea ng-model="newHabit.description" rows="3"></textarea>
+                    <button class="btn btn-primary" ng-click="addHabit()">Add Habit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <ul class="habit-list" ng-show="habits.length" ng-cloak>
+                    <li ng-repeat="habit in habits">
+                    <div>
+                        <p class="bg-info">{{habit.description}}</p>
+                        <button class="btn btn-danger" ng-click="deleteHabit($index)">Delete Habit</button>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="habits.html">
+            <div class="col-md-6">
+                <form>
+                    <label>Description</label>
+                    <textarea ng-model="newHabit.description" rows="3"></textarea>
+                    <button class="btn btn-primary" ng-click="addHabit()">Add Habit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <ul class="habit-list" ng-show="habits.length" ng-cloak>
+                    <li ng-repeat="habit in habits">
+                    <div>
+                        <p class="bg-info">{{habit.description}}</p>
+                        <button class="btn btn-danger" ng-click="deleteHabit($index)">Delete Habit</button>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="log.html">
+            <h1>Todays habit log: {{currUTCdate}}</h1>
+                <ul class="habit-list" ng-show="habits.length" ng-cloak>
+                    <li ng-repeat="habit in habits">
+                        <div>
+                            <p class="bg-info">{{habit.description}}</p>
+                            <form>
+                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="yes" ng-checked="habit.stats.today == 'yes'">Yes
+                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="no" ng-checked="habit.stats.today == 'no'">No
+                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="n/a" ng-checked="habit.stats.today == 'n/a'">N/A
+                            </form>
+                        </div>
+                        </li>
+                </ul>
+        </script>
+        <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-local-storage/angular-local-storage.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="my-app.js"></script>
+        <script type="text/javascript" src="controllers/userinfoctrl.js"></script>
+        <script type="text/javascript" src="controllers/habitslogctrl.js"></script>
+        <script type="text/javascript" src="controllers/habitsinfoctrl.js"></script>
+        <script type="text/javascript" src="factories/currdatefactory.js"></script>
+    </body>
+</html>
