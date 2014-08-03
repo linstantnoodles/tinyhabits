@@ -11,6 +11,28 @@
         </style>
     </head>
     <body ng-app="TinyHabits">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/user">User</a></li>
+                        <li><a href="#/habits">Habits</a></li>
+                        <li><a href="#/log">Log</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
         <div ng-view class="container"></div>
         <script type="text/ng-template" id="user.html">
             <div ng-controller="UserInfoController">
@@ -89,19 +111,30 @@
         </script>
 
         <script type="text/ng-template" id="log.html">
-            <h1>Todays habit log: {{currUTCdate}}</h1>
+            <div class="col-md-6">
+                <h1>Todays habit log: {{currUTCdate}}</h1>
                 <ul class="habit-list" ng-show="habits.length" ng-cloak>
                     <li ng-repeat="habit in habits">
-                        <div>
-                            <p class="bg-info">{{habit.description}}</p>
-                            <form>
-                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="yes" ng-checked="habit.stats.today == 'yes'">Yes
-                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="no" ng-checked="habit.stats.today == 'no'">No
-                                <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="n/a" ng-checked="habit.stats.today == 'n/a'">N/A
-                            </form>
-                        </div>
-                        </li>
+                    <div>
+                        <p class="bg-info" ng-click="showHistory($index)">{{habit.description}}</p>
+                        <form>
+                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="yes" ng-checked="habit.stats.today == 'yes'">Yes
+                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="no" ng-checked="habit.stats.today == 'no'">No
+                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="n/a" ng-checked="habit.stats.today == 'n/a'">N/A
+                        </form>
+                    </div>
+                    </li>
                 </ul>
+            </ul>
+        </div>
+        <div class="col-md-6" ng-show="habitHistory" ng-cloak>
+            <h1>History</h1>
+            <ul class="habit-history">
+                <li ng-repeat="(date, stat) in habitHistory.stats">
+                <p>{{date}} : {{stat.status}}</p>
+                </li>
+            </ul>
+        </div>
         </script>
         <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-local-storage/angular-local-storage.min.js"></script>

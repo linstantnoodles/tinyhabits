@@ -9,10 +9,6 @@ app.controller('HabitsInfoController', [
       stats: {}
     };
 
-    defaultHabit.stats[currUTCdate] = {
-      status: ""
-    };
-
     $scope.newHabit = defaultHabit;
     $scope.habits = localStorageService.get("habits") || [];
     $scope.addHabit = function() {
