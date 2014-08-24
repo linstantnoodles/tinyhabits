@@ -110,18 +110,22 @@
             </div>
         </script>
 
+        <script type="text/ng-template" id="form.html">
+            <p class="bg-info" ng-click="showHistory($index)">{{habit.description}}</p>
+            <form>
+                <input type="radio" name="box" value="yes" ng-click="updateValue($event)" ng-checked="habitValue == 'yes'">Yes
+                <input type="radio" name="box" value="no" ng-click="updateValue($event)" ng-checked="habitValue == 'no'">No
+                <input type="radio" name="box" value="n/a" ng-click="updateValue($event)" ng-checked="habitValue == 'n/a'">N/A
+            </form>
+        </script>
+
         <script type="text/ng-template" id="log.html">
             <div class="col-md-6">
                 <h1>Todays habit log: {{currUTCdate}}</h1>
                 <ul class="habit-list" ng-show="habits.length" ng-cloak>
                     <li ng-repeat="habit in habits">
                     <div>
-                        <p class="bg-info" ng-click="showHistory($index)">{{habit.description}}</p>
-                        <form>
-                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="yes" ng-checked="habit.stats.today == 'yes'">Yes
-                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="no" ng-checked="habit.stats.today == 'no'">No
-                            <input type="radio" name="box" ng-model="habit.stats[$parent.currUTCdate].status" value="n/a" ng-checked="habit.stats.today == 'n/a'">N/A
-                        </form>
+                        <habitform></habitform>
                     </div>
                     </li>
                 </ul>
@@ -144,5 +148,6 @@
         <script type="text/javascript" src="controllers/habitslogctrl.js"></script>
         <script type="text/javascript" src="controllers/habitsinfoctrl.js"></script>
         <script type="text/javascript" src="factories/currdatefactory.js"></script>
+        <script type="text/javascript" src="directives/habitform.js"></script>
     </body>
 </html>
