@@ -5,7 +5,7 @@ app.directive("habitform", function() {
       scope.habitValue = (stats) ? stats.status : null;
       scope.updateValue = function(event) {
         var newVal = event.target.value;
-        if (scope.habit.stats[scope.currUTCdate]) {
+        if (!scope.habit.stats[scope.currUTCdate]) {
           scope.habit.stats[scope.currUTCdate] = {};
         }
         scope.habit.stats[scope.currUTCdate]["status"] = newVal;
