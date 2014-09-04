@@ -1,7 +1,6 @@
-var app = angular.module("TinyHabits", [
-    'LocalStorageModule',
-    'ngRoute'
-  ]).config(['$routeProvider', function($routeProvider) {
+app = angular.module "TinyHabits", ["LocalStorageModule", "ngRoute"]
+
+app.config ['$routeProvider', ($routeProvider) ->
     $routeProvider.when('/user', {
       templateUrl: "user.html",
       controller: "UserInfoController"
@@ -14,5 +13,5 @@ var app = angular.module("TinyHabits", [
     }).otherwise({
       redirectTo: '/user'
     });
-}]);
+];
 
