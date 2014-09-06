@@ -1,0 +1,23 @@
+{
+  "name": "tinyhabits",
+  "version": "0.0.0",
+  "description": "I'm building this small app to play around with Angular. The main idea is to give users a way to track their tiny habits (read about BJ Fogg's Tiny Habits Method).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linstantnoodles/tinyhabits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linstantnoodles/tinyhabits/issues"
+  },
+  "homepage": "https://github.com/linstantnoodles/tinyhabits",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.11.1"
+  }
+}
